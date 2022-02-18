@@ -1,5 +1,7 @@
 # hackman
 
+Please fill in your keys in `Game.vue`.
+
 ## Project setup
 ```
 npm install
@@ -10,15 +12,7 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Web browser
 ```
-npm run build
+localhost:8080
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -1,5 +1,5 @@
 <template>
-  <GameOver v-if="gameOver" :win="win" :word="word" :picUrl="picUrl" />
+  <GameOver :win="win" :word="word" :picUrl="picUrl" :showModal="gameOver"/>
   <div v-if="waiting">
     <div class="columns is-centered">
       <div class="column is-one-quarter">
@@ -46,11 +46,13 @@ export default {
       player: [],
       gameOver: false,
       win: false,
+      hackmanKey: "",
+      pixabayKey: "",
     };
   },
   beforeMount() {
     // 1 request per 2 seconds
-    fetch("https://clemsonhackman.com/api/word?key=" + "", {
+    fetch("https://clemsonhackman.com/api/word?key=" + this.hackmanKey, {
       method: "GET",
     })
       .then((resp) => resp.json())
@@ -64,7 +66,7 @@ export default {
       .then((word) => {
         // < 100 requests per min
         fetch(
-          `https://pixabay.com/api/?key=${""}` +
+          `https://pixabay.com/api/?key=${this.pixabayKey}` +
             `&q=${word}` +
             "&per_page=3",
           {
@@ -110,7 +112,6 @@ export default {
         this.player[pidx + 1] = 0;
       }
       // check win (no more spaces)
-      console.log("progress: " + this.right)
       if (!this.right.includes(" ")) {
         console.log("you win")
         this.gameOver = true;
